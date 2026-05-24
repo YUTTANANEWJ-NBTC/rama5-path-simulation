@@ -59,11 +59,12 @@ export default function App() {
   const loopLength = 12000;
 
   useEffect(() => {
-    fetch('/trips.json').then(res => res.json()).then(data => setTripsData1(data));
-    fetch('/routes.geojson').then(res => res.json()).then(data => setRoutesData1(data));
-    fetch('/trips2.json').then(res => res.json()).then(data => setTripsData2(data));
-    fetch('/routes2.geojson').then(res => res.json()).then(data => setRoutesData2(data));
-    fetch('/pois.json').then(res => res.json()).then(data => setPoisData(data));
+    const base = import.meta.env.BASE_URL;
+    fetch(`${base}trips.json`).then(res => res.json()).then(data => setTripsData1(data));
+    fetch(`${base}routes.geojson`).then(res => res.json()).then(data => setRoutesData1(data));
+    fetch(`${base}trips2.json`).then(res => res.json()).then(data => setTripsData2(data));
+    fetch(`${base}routes2.geojson`).then(res => res.json()).then(data => setRoutesData2(data));
+    fetch(`${base}pois.json`).then(res => res.json()).then(data => setPoisData(data));
   }, []);
 
   useEffect(() => {
