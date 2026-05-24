@@ -334,7 +334,7 @@ export default function App() {
         <div className="legend-section" style={{marginTop: '16px', fontSize: '0.8rem', color: '#cbd5e1'}}>
           <div style={{fontWeight: 600, marginBottom: '8px', color: '#e5e7eb'}}>Points of Interest</div>
           <div style={{display: 'flex', alignItems: 'center', marginBottom: '4px'}}>
-            <div style={{width: '12px', height: '12px', borderRadius: '50%', background: 'rgba(255, 204, 0, 0.8)', marginRight: '8px'}}></div> School
+            <div style={{width: '12px', height: '12px', borderRadius: '50%', background: 'rgba(255, 204, 0, 0.8)', marginRight: '8px'}}></div> Educational Institution
           </div>
           <div style={{display: 'flex', alignItems: 'center', marginBottom: '4px'}}>
             <div style={{width: '12px', height: '12px', borderRadius: '50%', background: 'rgba(255, 128, 0, 0.8)', marginRight: '8px'}}></div> Market
@@ -397,6 +397,11 @@ export default function App() {
           )}
         </div>
       )}
+      
+      {/* Footer Update */}
+      <div style={{ position: 'absolute', bottom: '16px', left: '24px', color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem', zIndex: 10, pointerEvents: 'none' }}>
+        Last updated : 24-May-2026 22:31
+      </div>
     </>
   );
 }

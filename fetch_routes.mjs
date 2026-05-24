@@ -29,25 +29,26 @@ async function fetchData() {
 
   fs.writeFileSync('./public/routes.geojson', JSON.stringify(geojson));
 
-  console.log("Fetching POIs from Overpass API...");
-  // Bounding box: south, west, north, east
+  console.log("Fetching POIs (Schools, Universities, Markets, Malls)...");
+  // Expand search area slightly around the bounding box of the start and end
   const overpassQuery = `
     [out:json];
     (
-      node["amenity"~"school|marketplace"](13.77,100.41,13.84,100.56);
+      node["amenity"~"school|university|college|marketplace"](13.77,100.41,13.84,100.56);
       node["shop"~"mall|department_store"](13.77,100.41,13.84,100.56);
-      way["amenity"~"school|marketplace"](13.77,100.41,13.84,100.56);
+      way["amenity"~"school|university|college|marketplace"](13.77,100.41,13.84,100.56);
       way["shop"~"mall|department_store"](13.77,100.41,13.84,100.56);
     );
     out center;
   `;
 
-  const overpassRes = await fetch('https://overpass-api.de/api/interpreter', {
-    method: 'POST',
-    body: overpassQuery,
+  // Provide a User-Agent to avoid 403 Forbidden
+  const overpassRes = await fetch("https://overpass-api.de/api/interpreter", {
+    method: "POST",
     headers: {
-      'User-Agent': 'Rama5TrafficSimulator/1.0'
-    }
+      "User-Agent": "AntigravityTrafficSim/1.0"
+    },
+    body: overpassQuery
   });
 
   if (!overpassRes.ok) {
@@ -66,7 +67,7 @@ async function fetchData() {
     }
     
     let type = 'unknown';
-    if (el.tags.amenity === 'school') type = 'school';
+    if (el.tags.amenity === 'school' || el.tags.amenity === 'university' || el.tags.amenity === 'college') type = 'school';
     if (el.tags.amenity === 'marketplace') type = 'market';
     if (el.tags.shop === 'mall' || el.tags.shop === 'department_store') type = 'mall';
 
